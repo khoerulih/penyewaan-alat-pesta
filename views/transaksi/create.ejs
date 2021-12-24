@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../templates/header.ejs") %>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <%- include("../templates/navbar.ejs")%> <%-
+      include("../templates/sidebar.ejs") %>
+      <!-- Content Wrapper. Contains page content -->
+
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>Transaksi</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item">
+                    <a href="/transaksi">Transaksi</a>
+                  </li>
+                  <li class="breadcrumb-item active">Tambah</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Form Tambah Transaksi</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                  <form action="/transaksi/create" method="POST">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label>Nama Alat</label>
+                        <div class="select2-purple">
+                          <select
+                            class="form-control select2"
+                            style="width: 100%"
+                            name="alats"
+                            data-placeholder="Pilih Alat"
+                            required
+                          >
+                            <option selected>Pilih Alat</option>
+                            <% alats.forEach(alat => { %>
+                            <option value="<%= alat._id %>">
+                              <%= alat.namaAlat %> - Rp. <%= alat.harga %>
+                            </option>
+                            <% }); %>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="harga">Harga</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          name="harga"
+                          id="harga"
+                          placeholder="Masukkan harga"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="jumlah">Jumlah</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          name="jumlah"
+                          id="jumlah"
+                          placeholder="Masukkan jumlah"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="durasiPeminjaman"
+                          >Durasi Peminjaman(Hari)</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          name="durasiPeminjaman"
+                          id="durasiPeminjaman"
+                          placeholder="Masukan Durasi Peminjaman"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="total">Total</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          name="total"
+                          id="total"
+                          placeholder="0"
+                          readonly
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="tanggalPeminjaman"
+                          >Tanggal Peminjaman</label
+                        >
+                        <input
+                          type="date"
+                          class="form-control"
+                          name="tanggalPeminjaman"
+                          id="tanggalPeminjaman"
+                          placeholder="Masukkan Tanggal Peminjaman"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>Nama Peminjam</label>
+                        <div class="select2-purple">
+                          <select
+                            class="form-control select2"
+                            style="width: 100%"
+                            name="pelanggans"
+                            data-placeholder="Pilih pelanggan"
+                            required
+                          >
+                            <option selected>Pilih Nama Peminjam</option>
+                            <% pelanggans.forEach(pelanggan => { %>
+                            <option value="<%= pelanggan._id %>">
+                              <%= pelanggan.nama %>
+                            </option>
+                            <% }); %>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">
+                        Simpan
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+      <%- include("../templates/footer.ejs") %>
+    </div>
+    <!-- ../../wrapper -->
+    <%- include("../templates/js.ejs") %>
+    <script>
+      const inputHarga = document.getElementById('harga');
+      const inputJumlah = document.getElementById('jumlah');
+      const inputDurasiPeminjaman = document.getElementById('durasiPeminjaman');
+      const total = document.getElementById('total');
+
+      const calculateTotal = function (e) {
+        const harga = inputHarga.value;
+        const jumlah = inputJumlah.value;
+        const durasiPeminjaman = inputDurasiPeminjaman.value
+          ? inputDurasiPeminjaman.value
+          : 1;
+        if (harga !== '' && jumlah !== '') {
+          total.value = harga * jumlah * durasiPeminjaman;
+        }
+      };
+
+      inputHarga.addEventListener('input', calculateTotal);
+      inputHarga.addEventListener('change', calculateTotal);
+      inputJumlah.addEventListener('input', calculateTotal);
+      inputJumlah.addEventListener('change', calculateTotal);
+      inputDurasiPeminjaman.addEventListener('input', calculateTotal);
+      inputDurasiPeminjaman.addEventListener('change', calculateTotal);
+    </script>
+  </body>
+</html>

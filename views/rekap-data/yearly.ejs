@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../templates/header.ejs") %>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <%- include("../templates/navbar.ejs")%> <%-
+      include("../templates/sidebar.ejs") %>
+      <!-- Content Wrapper. Contains page content -->
+
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>Rekap Data Tahunan</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item active">Rekap Data Tahunan</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table
+                      id="example2"
+                      class="table table-bordered table-hover"
+                    >
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Tahun</th>
+                          <th>Pendapatan</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% for(let i = 0; i < data.length; i++) { %>
+                        <tr>
+                          <td><%= i + 1 %></td>
+                          <td><%= data[i]._id.year %></td>
+                          <td><%= data[i].value %></td>
+                        </tr>
+                        <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+      <%- include("../templates/footer.ejs") %>
+    </div>
+    <!-- ../../wrapper -->
+    <%- include("../templates/js.ejs") %>
+  </body>
+</html>

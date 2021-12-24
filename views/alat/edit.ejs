@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../templates/header.ejs") %>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <%- include("../templates/navbar.ejs")%> <%-
+      include("../templates/sidebar.ejs") %>
+      <!-- Content Wrapper. Contains page content -->
+
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>Edit Alat</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item">
+                    <a href="/alat">Alat</a>
+                  </li>
+                  <li class="breadcrumb-item active">Edit</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Form Edit Alat</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                  <form
+                    action="/alat/edit/<%= alat._id %>?_method=PUT"
+                    method="POST"
+                  >
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label for="namaAlat">Nama Alat</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="namaAlat"
+                          id="namaAlat"
+                          placeholder="Masukkan Alat"
+                          value="<%= alat.namaAlat %>"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="harga">Harga Sewa</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          name="harga"
+                          id="harga"
+                          placeholder="Masukkan Harga "
+                          value="<%= alat.harga %>"
+                        />
+                      </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">
+                        Simpan
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+      <%- include("../templates/footer.ejs") %>
+    </div>
+    <!-- ../../wrapper -->
+    <%- include("../templates/js.ejs") %>
+  </body>
+</html>

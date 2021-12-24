@@ -1,0 +1,67 @@
+<table id="example2" class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Nama Alat</th>
+      <th>Jumlah</th>
+      <th>Durasi</th>
+      <th>Total</th>
+      <th>Tanggal Pinjam</th>
+      <th>Status Alat</th>
+      <th>Nama Peminjam</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let i = 0; i < transaksi.length; i++) { %>
+    <tr>
+      <td><%= i + 1 %></td>
+      <td>
+        <%= transaksi[i]?.alats?.namaAlat %> - Rp.<%= transaksi[i].harga %>
+      </td>
+      <td><%= transaksi[i].jumlah %> pcs</td>
+      <td><%= transaksi[i].durasiPeminjaman %> Hari</td>
+      <td>Rp. <%= transaksi[i].total %></td>
+      <td>
+        <%= moment(transaksi[i].tanggalPeminjaman).format('DD-MM-YYYY') %>
+      </td>
+      <td>
+        <% if(transaksi[i].statusAlat == 'dipinjam') { %>
+        <span class="badge badge-warning">
+          <%= transaksi[i].statusAlat %>
+        </span>
+        <% } else if (transaksi[i].statusAlat == 'dikembalikan') { %>
+        <span class="badge badge-success">
+          <%= transaksi[i].statusAlat %>
+        </span>
+        <% } else { %>
+        <span class="badge badge-danger"> <%= transaksi[i].statusAlat %> </span>
+        <% } %>
+      </td>
+      <td><%= transaksi[i]?.pelanggans?.nama %></td>
+      <td>
+        <form
+          action="/transaksi/status/<%= transaksi[i]._id %>?status=dikembalikan&_method=PUT"
+          method="POST"
+          style="display: inline-block"
+        >
+          <button class="btn btn-success btn-sm">
+            <i class="fas fa-check"></i>
+            Selesai
+          </button>
+        </form>
+        <form
+          action="/transaksi/status/<%= transaksi[i]._id %>?status=hilang&_method=PUT"
+          method="POST"
+          style="display: inline-block"
+        >
+          <button class="btn btn-danger btn-sm">
+            <i class="fas fa-times-circle"></i>
+            Gagal
+          </button>
+        </form>
+      </td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>

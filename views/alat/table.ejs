@@ -1,0 +1,37 @@
+<table id="example2" class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Nama Alat</th>
+      <th>Harga Sewa</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let i = 0; i < alat.length; i++) { %>
+    <tr>
+      <td><%= i + 1 %></td>
+      <td><%= alat[i].namaAlat %></td>
+      <td><%= alat[i].harga %></td>
+      <td>
+        <form
+          action="/alat/delete/<%= alat[i]._id %>?_method=DELETE"
+          method="POST"
+        >
+          <a
+            href="/alat/edit/<%= alat[i]._id %>"
+            class="btn btn-warning text-white btn-sm"
+          >
+            <i class="fas fa-pencil-alt"></i>
+            Ubah
+          </a>
+          <button class="btn btn-danger btn-sm">
+            <i class="fas fa-trash"></i>
+            Hapus
+          </button>
+        </form>
+      </td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
